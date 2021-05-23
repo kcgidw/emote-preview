@@ -1,18 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
+html {
+	font-size: 16px;
+}
+
 body {
 	width: 100vw;
 	height: 100vh;
 
-	--gray0: hsl(240, 20%, 15%);
-	--gray1: hsl(240, 20%, 20%);
-	--gray2: hsl(240, 20%, 30%);
-	--gray3: hsl(240, 20%, 40%);
-	--gray4: hsl(240, 20%, 55%);
-	--gray5: hsl(240, 20%, 70%);
-	--gray6: hsl(240, 20%, 80%);
-	--gray7: hsl(240, 20%, 90%);
-	--gray8: hsl(240, 20%, 95%);
+	--gray0: hsl(230, 05%, 15%);
+	--gray1: hsl(230, 05%, 20%);
+	--gray2: hsl(230, 05%, 30%);
+	--gray3: hsl(230, 05%, 40%);
+	--gray4: hsl(230, 05%, 55%);
+	--gray5: hsl(230, 05%, 70%);
+	--gray6: hsl(230, 05%, 80%);
+	--gray7: hsl(230, 05%, 90%);
+	--gray8: hsl(230, 05%, 95%);
 }
 
 #app {
@@ -20,4 +24,6 @@ body {
 	font-family: Quicksand, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background: var(--gray8);
+	color: var(--gray3);
 }

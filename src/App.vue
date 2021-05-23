@@ -3,7 +3,18 @@
 		<div class="top">
 			<h1>Emote preview</h1>
 		</div>
-		<Preview :url="url" v-if="file" />
+		<div class="main previews">
+			<div class="preview-group disc-dark">
+				<Preview :url="url" class="disc-l" />
+				<Preview :url="url" class="disc-m" />
+				<Preview :url="url" class="disc-react" />
+			</div>
+			<div class="preview-group disc-light">
+				<Preview :url="url" class="disc-l" />
+				<Preview :url="url" class="disc-m" />
+				<Preview :url="url" class="disc-react" />
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -53,6 +64,34 @@ export default {
 	h1 {
 		margin: 0;
 		font-size: 32px;
+	}
+}
+
+.main {
+	margin: auto;
+	width: 320px;
+}
+.previews {
+	display: flex;
+	justify-content: center;
+}
+.preview-group {
+	flex: 0 0 auto;
+	margin: 64px;
+	padding: 32px;
+	border-radius: 8px;
+	box-shadow: 0 4px 16px -4px var(--gray4);
+	&.disc-dark {
+		background: #36393f;
+	}
+	&.disc-light {
+		background: #fff;
+	}
+	&.twitch-light {
+		background: #fff;
+	}
+	&.twitch-theater {
+		background: #18181b;
 	}
 }
 </style>
