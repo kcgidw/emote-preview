@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+body {
+	width: 100vw;
+	height: 100vh;
+
+	--gray0: hsl(240, 20%, 15%);
+	--gray1: hsl(240, 20%, 20%);
+	--gray2: hsl(240, 20%, 30%);
+	--gray3: hsl(240, 20%, 40%);
+	--gray4: hsl(240, 20%, 55%);
+	--gray5: hsl(240, 20%, 70%);
+	--gray6: hsl(240, 20%, 80%);
+	--gray7: hsl(240, 20%, 90%);
+	--gray8: hsl(240, 20%, 95%);
+}
+
+#app {
+	height: 100%;
+	font-family: Quicksand, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

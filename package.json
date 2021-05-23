@@ -1,0 +1,19 @@
+{
+  "name": "emote-preview",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "modern-normalize": "^1.1.0",
+    "vue": "^3.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.2",
+    "@vue/compiler-sfc": "^3.0.5",
+    "sass": "^1.34.0",
+    "vite": "^2.3.3"
+  }
+}
