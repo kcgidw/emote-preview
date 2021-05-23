@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
 html {
 	font-size: 16px;
@@ -21,7 +21,8 @@ body {
 
 #app {
 	height: 100%;
-	font-family: Quicksand, Helvetica, Arial, sans-serif;
+	font-family: Nunito, Helvetica, Arial, sans-serif;
+	font-size: 18px;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background: var(--gray8);

@@ -34,7 +34,7 @@ export default {
 	height: 28px;
 }
 .empty {
-	outline: dashed hsla(0, 0%, 50%) 1px;
+	outline: dashed var(--gray5) 1px;
 }
 img {
 	width: 100%;
