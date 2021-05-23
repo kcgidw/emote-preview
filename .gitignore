@@ -3,3 +3,11 @@ node_modules
 dist
 dist-ssr
 *.local
+.vscode
+.nvmrc
+.npmrc
+.env
+*.log
+*.bundle.*
+*.min.*
+ignore
