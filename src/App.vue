@@ -39,7 +39,6 @@
 					/>
 				</p>
 			</div>
-			<!-- <p class="filename">{{ file?.name || '' }}</p> -->
 			<div class="side-section">
 				<p class="">
 					Previews aim to match the appearance of respective web
@@ -60,38 +59,44 @@
 			</div>
 		</div>
 		<div class="main">
-			<div class="row preview-group disc">
-				<div class="set-icon-wrapper disc-dark">
-					<font-awesome-icon
-						:icon="['fab', 'discord']"
-						size="2x"
-						fixed-width
-					/>
-				</div>
-				<div class="preview-set disc-dark">
-					<Preview :url="url" class="disc-l" />
-					<Preview :url="url" class="disc-m" />
-					<Preview :url="url" class="disc-react" />
-				</div>
-				<div class="preview-set disc-light">
-					<Preview :url="url" class="disc-l" />
-					<Preview :url="url" class="disc-m" />
-					<Preview :url="url" class="disc-react" />
-				</div>
+			<div class="notif">
+				<div class="error" v-if="err">Error loading file.</div>
+				<div class="" v-if="!err">{{ file?.name || '' }}</div>
 			</div>
-			<div class="row preview-group twitch">
-				<div class="set-icon-wrapper twitch-light">
-					<font-awesome-icon
-						:icon="['fab', 'twitch']"
-						size="2x"
-						fixed-width
-					/>
+			<div class="previews">
+				<div class="row preview-group disc">
+					<div class="set-icon-wrapper disc-dark">
+						<font-awesome-icon
+							:icon="['fab', 'discord']"
+							size="2x"
+							fixed-width
+						/>
+					</div>
+					<div class="preview-set disc-dark">
+						<Preview :url="url" class="disc-l" />
+						<Preview :url="url" class="disc-m" />
+						<Preview :url="url" class="disc-react" />
+					</div>
+					<div class="preview-set disc-light">
+						<Preview :url="url" class="disc-l" />
+						<Preview :url="url" class="disc-m" />
+						<Preview :url="url" class="disc-react" />
+					</div>
 				</div>
-				<div class="preview-set twitch-light">
-					<Preview :url="url" class="twitch" />
-				</div>
-				<div class="preview-set twitch-theater">
-					<Preview :url="url" class="twitch" />
+				<div class="row preview-group twitch">
+					<div class="set-icon-wrapper twitch-light">
+						<font-awesome-icon
+							:icon="['fab', 'twitch']"
+							size="2x"
+							fixed-width
+						/>
+					</div>
+					<div class="preview-set twitch-light">
+						<Preview :url="url" class="twitch" />
+					</div>
+					<div class="preview-set twitch-theater">
+						<Preview :url="url" class="twitch" />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -113,29 +118,33 @@ export default {
 	},
 	methods: {
 		browse(e) {
-			this.file = document.getElementById('browse').files[0];
+			const f = document.getElementById('browse').files[0];
+			if (f) {
+				this.load(f);
+			}
 		},
 		clickBrowse(e) {
 			document.getElementById('browse').click();
 		},
 		dragOver(e) {
-			this.dragging = e.dataTransfer;
+			this.dragging = e.dataTransfer?.types.indexOf('Files') > -1;
 		},
 		dragEnd(e) {
 			this.dragging = false;
 		},
 		drop(e) {
 			this.dragging = false;
-			try {
-				const files = e.dataTransfer.items;
-				const f = files[0]?.getAsFile();
-				if (f && f.type.startsWith('image/')) {
-					this.file = f;
-					this.err = false;
-				} else {
-					this.err = true;
-				}
-			} catch (err) {
+			if (e.dataTransfer.files.length) {
+				const files = e.dataTransfer.files;
+				const f = files[0];
+				this.load(f);
+			}
+		},
+		load(f) {
+			if (f && f.type.startsWith('image/')) {
+				this.file = f;
+				this.err = false;
+			} else {
 				this.err = true;
 			}
 		},
@@ -206,13 +215,13 @@ button#browse-fake {
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(255, 255, 255, 0.95);
+	background: rgba(255, 255, 255, 0.9);
 	padding: 64px;
 
 	&-inner {
 		height: 100%;
 		border-radius: 64px;
-		outline: dashed var(--gray4) 12px;
+		outline: dashed var(--gray5) 12px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -228,15 +237,25 @@ button#browse-fake {
 }
 
 .main {
+	flex-grow: 1;
+	display: flex;
+}
+.previews {
 	margin: auto;
 	padding: 32px;
+	display: inline-block;
 }
-.filename {
-	max-width: 100%;
+.notif {
+	position: absolute;
+	max-width: 500px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-style: italic;
+	padding: 8px;
+}
+.error {
+	color: red;
 }
 .preview-group {
 	display: flex;
@@ -265,6 +284,7 @@ button#browse-fake {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	height: 208px;
 }
 .disc-dark {
 	background: #36393f;
