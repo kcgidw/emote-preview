@@ -12,31 +12,52 @@
 				<div>Drop image file</div>
 			</div>
 		</div>
-		<div class="top">
-			<h1>Emote preview</h1>
-			<p>Preview an image at standard Discord/Twitch dimensions.</p>
-			<p>
-				I got tired of revising and reuploading WIP custom emojis to a
-				private server.
-			</p>
-			<br />
-			<p>
-				Drop an image file onto the page, or
-				<button
-					id="browse-fake"
-					aria-label="browse"
-					@click="clickBrowse"
+		<div class="side">
+			<div class="title side-section">
+				<h1>Emote preview</h1>
+				<h2>Preview an image at standard Discord/Twitch dimensions.</h2>
+			</div>
+			<div class="side-section">
+				<p>
+					I got tired of revising and reuploading WIP custom emojis to
+					a private server.
+				</p>
+				<p>
+					Drop an image file onto the page, or
+					<button
+						id="browse-fake"
+						aria-label="browse"
+						@click="clickBrowse"
+					>
+						Browse
+					</button>
+					<input
+						type="file"
+						id="browse"
+						accept="image/*"
+						@change="browse"
+					/>
+				</p>
+			</div>
+			<!-- <p class="filename">{{ file?.name || '' }}</p> -->
+			<div class="side-section">
+				<p class="">
+					Previews aim to match the appearance of respective web
+					browser clients. Image quality can differ slightly on
+					desktop and mobile clients, but the browser clients seem to
+					be the lowest common denominator anyhow.
+				</p>
+			</div>
+			<div class="spacer" />
+			<div class="links side-section">
+				<a
+					target="_blank"
+					href="https://github.com/kcgidw/emote-preview"
+					>Github</a
 				>
-					Browse
-				</button>
-				<input
-					type="file"
-					id="browse"
-					accept="image/*"
-					@change="browse"
-				/>
-				<!-- <span class="filename">{{ file?.name || '' }Okay}</span> -->
-			</p>
+				-
+				<a target="_blank" href="https://ko-fi.com/krackocloud">Kofi</a>
+			</div>
 		</div>
 		<div class="main">
 			<div class="row preview-group disc">
@@ -131,20 +152,35 @@ export default {
 .container {
 	height: 100%;
 	display: flex;
-	flex-direction: column;
-	padding: 8px;
 }
-
-.top {
+.side {
 	overflow: hidden;
-	padding: 0 16px;
+	border-right: solid 2px var(--gray7);
+	flex: 0 1 400px;
+	display: flex;
+	flex-direction: column;
+
+	.spacer {
+		flex-grow: 1;
+	}
+	.title {
+		border-bottom: solid 2px var(--gray7);
+	}
+	.side-section {
+		padding: 16px;
+	}
 
 	h1 {
-		margin: 16px 0;
+		margin: 16px 0 16px;
 		font-size: 32px;
 	}
+	h2 {
+		margin: 16px 0;
+		font-size: 20px;
+		font-weight: normal;
+	}
 	p {
-		margin: 0;
+		margin: 8px 0;
 	}
 }
 #browse {
@@ -193,13 +229,13 @@ button#browse-fake {
 
 .main {
 	margin: auto;
+	padding: 32px;
 }
 .filename {
-	max-width: 500px;
+	max-width: 100%;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	font-size: 12px;
 	font-style: italic;
 }
 .preview-group {
@@ -207,13 +243,12 @@ button#browse-fake {
 	border-radius: 4px;
 	overflow: hidden;
 	box-shadow: 0 4px 16px -8px var(--gray6);
-	margin-bottom: 32px;
+	margin-bottom: 48px;
 }
 .set-icon-wrapper {
-	flex: 0 0 auto;
-	padding: 16px 0 0 16px;
+	position: absolute;
+	margin: 16px 0 0 16px;
 	svg {
-		/* margin-right: 16px; */
 		position: relative;
 	}
 	svg[data-icon='discord'] {
@@ -223,10 +258,9 @@ button#browse-fake {
 		color: rgba(0, 0, 0, 0.2);
 	}
 }
-
 .preview-set {
 	flex: 1 0 auto;
-	padding: 32px;
+	padding: 64px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

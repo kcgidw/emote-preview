@@ -1,3 +1,4 @@
+@use 'node_modules/modern-normalize/modern-normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
 
 html {
@@ -22,10 +23,17 @@ body {
 #app {
 	height: 100%;
 	font-family: Nunito, Helvetica, Arial, sans-serif;
-	font-size: 18px;
-	line-height: 2rem;
+	line-height: 1.5rem;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background: var(--gray8);
 	color: var(--gray2);
+}
+.small{
+	font-size: 12px;
+}
+a{
+	color: rgb(31, 53, 177);
+	cursor: pointer;
+	text-decoration: underline;
 }
