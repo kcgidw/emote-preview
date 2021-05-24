@@ -1,15 +1,45 @@
 <template>
-	<div class="container" @dragover.prevent="dragOver" @drop.prevent="drop">
+	<div
+		class="container"
+		@dragover.prevent="dragOver"
+		@dragend="dragEnd"
+		@dragleave="dragEnd"
+		@drop.prevent="drop"
+	>
+		<div class="drag-overlay" v-show="dragging">
+			<div class="drag-overlay-inner">
+				<font-awesome-icon :icon="['fas', 'paperclip']" size="6x" />
+				<div>Drop image file</div>
+			</div>
+		</div>
 		<div class="top">
 			<h1>Emote preview</h1>
 			<p>Preview an image at standard Discord/Twitch dimensions.</p>
 			<p>
+				I got tired of revising and reuploading WIP custom emojis to a
+				private server.
+			</p>
+			<br />
+			<p>
 				Drop an image file onto the page, or
-				<button class="browse" aria-label="browse">Browse</button>
+				<button
+					id="browse-fake"
+					aria-label="browse"
+					@click="clickBrowse"
+				>
+					Browse
+				</button>
+				<input
+					type="file"
+					id="browse"
+					accept="image/*"
+					@change="browse"
+				/>
+				<!-- <span class="filename">{{ file?.name || '' }Okay}</span> -->
 			</p>
 		</div>
 		<div class="main">
-			<div class="preview-group disc">
+			<div class="row preview-group disc">
 				<div class="set-icon-wrapper disc-dark">
 					<font-awesome-icon
 						:icon="['fab', 'discord']"
@@ -28,7 +58,7 @@
 					<Preview :url="url" class="disc-react" />
 				</div>
 			</div>
-			<div class="preview-group twitch">
+			<div class="row preview-group twitch">
 				<div class="set-icon-wrapper twitch-light">
 					<font-awesome-icon
 						:icon="['fab', 'twitch']"
@@ -56,16 +86,36 @@ export default {
 		return {
 			file: undefined,
 			url: undefined,
+			dragging: false,
+			err: false,
 		};
 	},
 	methods: {
-		dragOver(e) {},
+		browse(e) {
+			this.file = document.getElementById('browse').files[0];
+		},
+		clickBrowse(e) {
+			document.getElementById('browse').click();
+		},
+		dragOver(e) {
+			this.dragging = e.dataTransfer;
+		},
+		dragEnd(e) {
+			this.dragging = false;
+		},
 		drop(e) {
-			let files = e.dataTransfer.items;
-			let f = files[0]?.getAsFile();
-			if (f && f.type.startsWith('image/')) {
-				this.file = f;
-				console.log(f);
+			this.dragging = false;
+			try {
+				const files = e.dataTransfer.items;
+				const f = files[0]?.getAsFile();
+				if (f && f.type.startsWith('image/')) {
+					this.file = f;
+					this.err = false;
+				} else {
+					this.err = true;
+				}
+			} catch (err) {
+				this.err = true;
 			}
 		},
 	},
@@ -95,10 +145,12 @@ export default {
 	}
 	p {
 		margin: 0;
-		line-height: 32px;
 	}
 }
-button.browse {
+#browse {
+	display: none;
+}
+button#browse-fake {
 	padding: 4px 16px;
 	background: var(--gray7);
 	border: solid 1px var(--gray5);
@@ -111,12 +163,44 @@ button.browse {
 	}
 }
 
+.drag-overlay {
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(255, 255, 255, 0.95);
+	padding: 64px;
+
+	&-inner {
+		height: 100%;
+		border-radius: 64px;
+		outline: dashed var(--gray4) 12px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		font-size: 32px;
+		font-weight: bold;
+
+		svg {
+			margin: 32px;
+			color: var(--gray5);
+		}
+	}
+}
+
 .main {
 	margin: auto;
 }
-.previews {
-	display: flex;
-	justify-content: center;
+.filename {
+	max-width: 500px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	font-style: italic;
 }
 .preview-group {
 	display: flex;
@@ -136,7 +220,7 @@ button.browse {
 		color: rgba(255, 255, 255, 0.3);
 	}
 	svg[data-icon='twitch'] {
-		color: rgba(0, 0, 0, 0.3);
+		color: rgba(0, 0, 0, 0.2);
 	}
 }
 

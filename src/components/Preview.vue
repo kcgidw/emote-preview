@@ -16,6 +16,9 @@ export default {
 .preview-container {
 	margin: 16px;
 	flex: 0 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .disc-l {
 	width: 3rem;

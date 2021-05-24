@@ -4,10 +4,12 @@ import './style.scss';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTwitch, faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faTwitch);
 library.add(faDiscord);
+library.add(faPaperclip);
 
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon);
