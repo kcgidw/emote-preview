@@ -3,7 +3,7 @@
 		class="container"
 		@dragover.prevent="dragOver"
 		@dragend="dragEnd"
-		@dragleave="dragEnd"
+		@dragleave="dragLeave"
 		@drop.prevent="drop"
 	>
 		<div class="drag-overlay" v-show="dragging">
@@ -129,10 +129,13 @@ export default {
 			document.getElementById('browse').click();
 		},
 		dragOver(e) {
-			this.dragging = e.dataTransfer?.types.indexOf('Files') > -1;
+			this.dragging = e.dataTransfer?.types.includes('Files');
 		},
 		dragEnd(e) {
 			this.dragging = false;
+		},
+		dragLeave(e) {
+			this.dragging = !!e.relatedTarget;
 		},
 		drop(e) {
 			this.dragging = false;
@@ -223,7 +226,7 @@ button#browse-fake {
 	&-inner {
 		height: 100%;
 		border-radius: 64px;
-		outline: dashed var(--gray5) 12px;
+		border: dashed 12px var(--gray5);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
