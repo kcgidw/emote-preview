@@ -32,9 +32,13 @@ export default {
 	width: 1rem;
 	height: 1rem;
 }
-.twitch {
+.twitch-1 {
 	width: 28px;
 	height: 28px;
+}
+.twitch-badge {
+	width: 18px;
+	height: 18px;
 }
 .empty {
 	outline: dashed var(--gray5) 1px;

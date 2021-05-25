@@ -19,8 +19,8 @@
 			</div>
 			<div class="side-section">
 				<p>
-					I got tired of revising and reuploading WIP custom emojis to
-					a private server.
+					I got tired of constantly revising and reuploading custom
+					emoji WIPs to a private server to see how they look.
 				</p>
 				<p>
 					Drop an image file onto the page, or
@@ -48,7 +48,7 @@
 				</p>
 			</div>
 			<div class="spacer" />
-			<div class="links side-section">
+			<div class="links side-section small">
 				<a
 					target="_blank"
 					href="https://github.com/kcgidw/emote-preview"
@@ -92,10 +92,12 @@
 						/>
 					</div>
 					<div class="preview-set twitch-light">
-						<Preview :url="url" class="twitch" />
+						<Preview :url="url" class="twitch-1" />
+						<Preview :url="url" class="twitch-badge" />
 					</div>
 					<div class="preview-set twitch-theater">
-						<Preview :url="url" class="twitch" />
+						<Preview :url="url" class="twitch-1" />
+						<Preview :url="url" class="twitch-badge" />
 					</div>
 				</div>
 			</div>
