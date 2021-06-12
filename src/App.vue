@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		<div class="side">
-			<div class="title side-section">
+			<div class="side-section title">
 				<h1>Emote preview</h1>
 				<h2>Preview an image at standard Discord/Twitch dimensions.</h2>
 			</div>
@@ -42,13 +42,13 @@
 			<div class="side-section">
 				<p class="">
 					Previews aim to match the appearance of respective web
-					browser clients. Image quality can differ slightly on
-					desktop and mobile clients, but the browser clients seem to
-					be the lowest common denominator anyhow.
+					browser clients. Image quality can differ slightly on other
+					clients, but the browsers seem to be the lowest common
+					denominator anyhow.
 				</p>
 			</div>
 			<div class="spacer" />
-			<div class="links side-section small">
+			<div class="side-section links small">
 				<a
 					target="_blank"
 					href="https://github.com/kcgidw/emote-preview"
@@ -135,18 +135,10 @@ export default {
 			this.dragging = false;
 		},
 		dragLeave(e) {
-			/* this.dragging = !!e.relatedTarget; */
-
-			if (e.relatedTarget == null) { 
-				// relatedTarget == null when leaving the document
+			if (e.relatedTarget === null) {
+				// leaving the document
 				this.dragging = false;
 			}
-
-			/* [FIXME] 
-			 * '138: this.dragging = !!e.relatedTarget' is fighting with 
-			 * '132: this.dragging = e.dataTransfer?.types.includes('Files');' 
-			 * whether the 'drag-overlay' node is shown or hidden when dragging non-files. 
-			 */
 		},
 		drop(e) {
 			this.dragging = false;
@@ -231,24 +223,38 @@ button#browse-fake {
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(255, 255, 255, 0.9);
-	padding: 64px;
+	background: hsla(0, 0%, 0%, 0.6);
+	padding: 32px;
+	animation: overlay-fadein 0.2s;
 
 	&-inner {
 		height: 100%;
-		border-radius: 64px;
-		border: dashed 12px var(--gray5);
+		border-radius: 16px;
+		border: dashed 6px var(--gray5);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		font-size: 32px;
 		font-weight: bold;
+		color: var(--gray8);
+
+		& > div,
+		svg {
+			filter: drop-shadow(0 4px 12px var(--gray1));
+		}
 
 		svg {
 			margin: 32px;
-			color: var(--gray5);
 		}
+	}
+}
+@keyframes overlay-fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
 
