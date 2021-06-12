@@ -135,7 +135,18 @@ export default {
 			this.dragging = false;
 		},
 		dragLeave(e) {
-			this.dragging = !!e.relatedTarget;
+			/* this.dragging = !!e.relatedTarget; */
+
+			if (e.relatedTarget == null) { 
+				// relatedTarget == null when leaving the document
+				this.dragging = false;
+			}
+
+			/* [FIXME] 
+			 * '138: this.dragging = !!e.relatedTarget' is fighting with 
+			 * '132: this.dragging = e.dataTransfer?.types.includes('Files');' 
+			 * whether the 'drag-overlay' node is shown or hidden when dragging non-files. 
+			 */
 		},
 		drop(e) {
 			this.dragging = false;
