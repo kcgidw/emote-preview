@@ -8,7 +8,7 @@
 	>
 		<div class="drag-overlay" v-show="dragging">
 			<div class="drag-overlay-inner">
-				<font-awesome-icon :icon="['fas', 'paperclip']" size="6x" />
+				<font-awesome-icon :icon="['fas', 'image']" size="6x" />
 				<div>Drop image file</div>
 			</div>
 		</div>
@@ -41,10 +41,9 @@
 			</div>
 			<div class="side-section">
 				<p class="">
-					Previews aim to match the appearance of respective web
-					browser clients. Image quality can differ slightly on other
-					clients, but the browsers seem to be the lowest common
-					denominator anyhow.
+					Previews best match the appearance of respective web browser
+					clients. The end result can still differ slightly on other
+					clients, especially for large images.
 				</p>
 			</div>
 			<div class="spacer" />
@@ -238,11 +237,6 @@ button#browse-fake {
 		font-size: 32px;
 		font-weight: bold;
 		color: var(--gray8);
-
-		& > div,
-		svg {
-			filter: drop-shadow(0 4px 12px var(--gray1));
-		}
 
 		svg {
 			margin: 32px;
